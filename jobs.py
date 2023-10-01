@@ -14,7 +14,7 @@
 # Google is a little confusing to connect to so going to have to scope documentation to figure it out.
 
 class JobCandidate:
-    def __init__(self, candidate_id, name, contact_info, employment_history, skills, strengths, weaknesses, resume, cv, interests, references=None):
+    def __init__(self, candidate_id, name, contact_info, employment_history, skills, strengths, weaknesses, resume, cv, interests, work_types):
         self.candidate_id = candidate_id  # Unique ID for the candidate
         self.name = name
         self.contact_info = contact_info  # This could be a dictionary with email, phone, LinkedIn, etc.
@@ -25,7 +25,8 @@ class JobCandidate:
         self.resume = resume  # File path or link to the resume
         self.cv = cv  # File path or link to the CV
         self.interests = interests  # List of interests or hobbies
-        self.references = references or []  # List of reference contacts
+        self.work_types = work_types # List of tags that apply to the type of work. I.E. remote, full time, etc...
+        
 
     def match_with_job(self, job_requirements):
         # Implement matching logic here, comparing candidate's skills with job requirements
@@ -47,30 +48,25 @@ class JobCandidate:
         print(f"Strengths: {', '.join(self.strengths)}")
         print(f"Weaknesses: {', '.join(self.weaknesses)}")
         print(f"Interests: {', '.join(self.interests)}")
-        if self.references:
-            print("References:")
-            for reference in self.references:
-                print(f"  - Name: {reference['name']}, Contact: {reference['contact']}")
+        print(f"Type: {', '.join(self.work_types)}")
+        
 
 # Example usage:
 candidate_data = {
     "candidate_id": 1,
-    "name": "John Doe",
+    "name": "Ty Doe",
     "contact_info": {"email": "johndoe@example.com", "phone": "+1234567890"},
     "employment_history": [
-        {"position": "Software Engineer", "company": "Tech Inc.", "start_date": "2020-01-01", "end_date": "2022-12-31"},
-        {"position": "Data Analyst", "company": "Data Co.", "start_date": "2018-05-01", "end_date": "2019-12-31"}
+        {"position": "Full Stack Java Developer (Paid Training)", "company": "Dev 10", "start_date": "2020-01-01", "end_date": "2022-12-31"},
+        {"position": "Lab technician", "company": "Biotech inc.", "start_date": "2018-05-01", "end_date": "2019-12-31"}
     ],
-    "skills": ["Python", "Machine Learning", "Data Analysis"],
-    "strengths": ["Problem Solving", "Teamwork"],
-    "weaknesses": ["Public Speaking", "Time Management"],
+    "skills": ["Java", "Full Stack Development", "Web Development", "HTML", "CSS"],
+    "strengths": ["Leadership", "Teamwork", "Memory", "Learning", "Dedication"],
+    "weaknesses": ["Organization", "Patience"],
     "resume": "https://example.com/johndoe_resume.pdf",
     "cv": "https://example.com/johndoe_cv.pdf",
-    "interests": ["Hiking", "Reading"],
-    "references": [
-        {"name": "Jane Smith", "contact": "janesmith@example.com"},
-        {"name": "Bob Johnson", "contact": "bobjohnson@example.com"}
-    ]
+    "interests": ["Animals", "Technology", "Data Science"],
+    "work_types": ["Remote", "On Site", "Contract", "Temp", "Mobile", "Full Time", "Part Time", "Freelance"]
 }
 
 john_doe = JobCandidate(**candidate_data)
